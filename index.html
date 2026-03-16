@@ -69,7 +69,6 @@ max-width:500px;
 /* TYPING */
 
 #typing{
-font-size:18px;
 color:pink;
 min-height:30px;
 }
@@ -89,7 +88,7 @@ animation:shoot 4s linear infinite;
 100%{transform:translateY(100vh) translateX(200px)}
 }
 
-/* HEART */
+/* HEARTS */
 
 .heart{
 position:fixed;
@@ -111,18 +110,18 @@ height:340px;
 margin:40px auto;
 position:relative;
 transform-style:preserve-3d;
-animation:rotate 60s linear infinite;
+animation:rotate 50s linear infinite;
 perspective:1200px;
 }
 
 .carousel img{
 position:absolute;
-width:180px;
-height:240px;
+width:170px;
+height:230px;
 left:50%;
 top:50%;
-margin-left:-90px;
-margin-top:-120px;
+margin-left:-85px;
+margin-top:-115px;
 border-radius:15px;
 object-fit:cover;
 box-shadow:0 0 15px pink;
@@ -186,6 +185,7 @@ display:flex;
 align-items:center;
 justify-content:center;
 font-size:12px;
+cursor:pointer;
 }
 
 /* ENVELOPE */
@@ -271,9 +271,7 @@ animation:bounce 1s infinite;
 <h2>Our Journey ❤️</h2>
 
 <div class="love-map">
-
 <div class="road"></div>
-
 </div>
 
 </div>
@@ -349,7 +347,7 @@ document.getElementById("love").innerHTML=d+" days ❤️"
 
 },1000)
 
-/* TYPING EFFECT */
+/* TYPING */
 
 const text="You are the most beautiful part of my life ❤️"
 let i=0
@@ -392,11 +390,11 @@ setTimeout(()=>h.remove(),6000)
 
 const carousel=document.getElementById("carousel")
 
-const total=50
+const total=20
 
 const theta=360/total
 
-const radius=260
+const radius=220
 
 for(let i=1;i<=total;i++){
 
@@ -452,6 +450,14 @@ div.style.left=x+"px"
 
 div.style.top=yPos+"px"
 
+div.onclick=()=>{
+
+modal.style.display="flex"
+
+modalImg.src=(i*2+1)+".jpg"
+
+}
+
 map.appendChild(div)
 
 })
@@ -472,7 +478,7 @@ document.getElementById("proposal").style.display="flex"
 
 },8000)
 
-/* YES BUTTON */
+/* YES */
 
 function yes(){
 
