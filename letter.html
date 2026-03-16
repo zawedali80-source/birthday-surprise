@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>My Love Letter</title>
+<style>
+/* ===================== BODY & HTML ===================== */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden; /* Prevent scroll bar */
+}
+
+body {
+  background: radial-gradient(circle at top,#2b001f,#000);
+  font-family:'Brush Script MT',cursive;
+  color:#4a2c16;
+  position: relative;
+}
+
+/* ===================== GALAXY STARS ===================== */
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: white;
+  opacity: 0.8;
+  animation: starMove linear infinite;
+}
+@keyframes starMove {
+  0% { transform: translateY(-10vh); opacity: 0 }
+  10% { opacity: 1 }
+  100% { transform: translateY(110vh); opacity: 0 }
+}
+
+/* ===================== FLOATING PHOTOS ===================== */
+.bg {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+}
+.bg img {
+  position: absolute;
+  width: 260px;
+  opacity: 0.22;
+  filter: blur(5px);
+  border-radius: 14px;
+  animation: float 32s linear infinite;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+}
+@keyframes float {
+  0% { transform: translateY(120vh) scale(1) }
+  100% { transform: translateY(-20vh) scale(1.2) }
+}
+
+/* ===================== ROSE PETALS ===================== */
+.petal {
+  position: absolute;
+  width: 14px;
+  height: 18px;
+  background: linear-gradient(45deg,#ff7aa2,#ff4d88);
+  border-radius: 50% 50% 50% 0;
+  opacity: 0.85;
+  animation: fall 8s linear infinite;
+}
+@keyframes fall {
+  0% { transform: translateY(-10vh) rotate(0deg) }
+  100% { transform: translateY(110vh) rotate(360deg) }
+}
+
+/* ===================== HEART EXPLOSION ===================== */
+.heart {
+  position: absolute;
+  font-size: 20px;
+  animation: explode 2s ease forwards;
+}
+@keyframes explode {
+  0% { transform: scale(0); opacity: 1 }
+  100% { transform: translateY(-150px) scale(2); opacity: 0 }
+}
+
+/* ===================== ENVELOPE ===================== */
+.envelope {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 240px;
+  height: 150px;
+  background: linear-gradient(#fff,#f1f1f1);
+  cursor: pointer;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.7);
+  border-radius: 6px;
+  transition: 0.3s;
+}
+.envelope:hover {
+  transform: translate(-50%,-50%) scale(1.05);
+  box-shadow: 0 25px 80px rgba(255,0,100,0.5);
+}
+.envelope:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-left: 120px solid transparent;
+  border-right: 120px solid transparent;
+  border-bottom: 75px solid #ececec;
+}
+
+/* ===================== LETTER ===================== */
+.letter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 540px;
+  max-width: 90%;
+  max-height: 90%;
+  height: auto;
+  background: linear-gradient(#fffdf7,#f9f0d9);
+  padding: 110px 50px;
+  box-sizing: border-box;
+  display: none;
+  border-radius: 8px;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.8);
+  animation: fadeIn 1s ease;
+  overflow-y: auto;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translate(-50%,-60%) }
+  to { opacity: 1; transform: translate(-50%,-50%) }
+}
+
+/* ===================== TEXT ===================== */
+#text {
+  font-size: 26px;
+ 
+  white-space: pre-wrap;
+}
+
+/* ===================== MOBILE ===================== */
+@media(max-width:600px){
+  .letter {
+    height: 85vh;
+    padding: 90px 40px;
+  }
+  #text {
+    font-size: 20px;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- BACKGROUND PHOTOS -->
+<div class="bg">
+  <img src="photo1.jpg" style="left:5%;animation-duration:32s;">
+  <img src="photo2.jpg" style="left:30%;animation-duration:28s;">
+  <img src="photo3.jpg" style="left:60%;animation-duration:35s;">
+  <img src="photo4.jpg" style="left:80%;animation-duration:30s;">
+</div>
+
+<!-- ENVELOPE -->
+<div class="envelope" onclick="openLetter()"></div>
+
+<!-- LETTER PAPER -->
+<div class="letter" id="letter">
+  <div id="text"></div>
+</div>
+
+<audio src="piano.mp3" autoplay loop></audio>
+
+<script>
+/* ===================== OPEN LETTER ===================== */
+function openLetter(){
+  document.querySelector(".envelope").style.display="none";
+  document.getElementById("letter").style.display="block";
+  typeLetter();
+}
+
+/* ===================== ROSE PETALS ===================== */
+function petal(){
+  let p=document.createElement("div");
+  p.className="petal";
+  p.style.left=Math.random()*100+"vw";
+  p.style.animationDuration=(Math.random()*5+5)+"s";
+  document.body.appendChild(p);
+  setTimeout(()=>p.remove(),8000);
+}
+setInterval(petal,400);
+
+/* ===================== STARS ===================== */
+function star(){
+  let s=document.createElement("div");
+  s.className="star";
+  s.style.left=Math.random()*100+"vw";
+  s.style.animationDuration=(Math.random()*4+3)+"s";
+  document.body.appendChild(s);
+  setTimeout(()=>s.remove(),7000);
+}
+setInterval(star,150);
+
+/* ===================== HEART EXPLOSION ===================== */
+function hearts(){
+  for(let i=0;i<20;i++){
+    let h=document.createElement("div");
+    h.className="heart";
+    h.innerHTML="❤️";
+    h.style.left=(window.innerWidth/2+Math.random()*200-100)+"px";
+    h.style.top=(window.innerHeight/2)+"px";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),2000);
+  }
+}
+
+/* ===================== LOVE MESSAGE ===================== */
+let msg=`My Dearest Ayesha ❤️
+
+Happy Birthday, meri jaan.
+
+Jab se tum meri zindagi me aayi ho,
+meri duniya aur bhi khoobsurat ho gayi hai.
+
+7 saal pehle hum sirf bachche the,
+lekin aaj bhi mera dil
+tumhare liye waise hi dhadakta hai.
+
+Humne bahut kuch dekha...
+khushi, ladai, dooriyan.
+
+Lekin har baar
+hamare dil phir ek dusre tak
+wapas aa gaye.
+
+Tum meri best friend ho,
+meri aadat ho,
+meri duniya ho.
+
+Agar zindagi ek kahani hai,
+to meri favourite kahani
+sirf tum ho.
+
+Main perfect nahi hoon,
+lekin tumse pyaar
+hamesha perfect rahega.
+
+Happy Birthday meri jaan ❤️
+
+Forever Yours  
+Raj ❤️`;
+
+let i=0;
+function typeLetter(){
+  if(i<msg.length){
+    document.getElementById("text").innerHTML += msg.charAt(i);
+    i++;
+    setTimeout(typeLetter,120);
+  } else {
+    hearts();
+  }
+}
+</script>
+
+</body>
+</html>
