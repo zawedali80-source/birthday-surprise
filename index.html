@@ -79,7 +79,6 @@ box-sizing:border-box;
 }
 
 /* 3D CAROUSEL */
-
 .carousel{
 width:220px;
 height:260px;
@@ -91,8 +90,8 @@ animation:rotate 25s linear infinite;
 
 .carousel img{
 position:absolute;
-width:100%;
-height:auto;
+width:200px;
+height:260px;
 left:10px;
 top:0;
 border-radius:15px;
@@ -212,7 +211,19 @@ background:pink;
 color:white;
 margin:10px;
 }
+@media(max-width:600px){
 
+.carousel{
+width:180px;
+height:230px;
+}
+
+.carousel img{
+width:180px;
+height:230px;
+}
+
+}
 </style>
 
 </head>
