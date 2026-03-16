@@ -16,6 +16,7 @@ background:black;
 color:white;
 text-align:center;
 overflow-x:hidden;
+perspective:1200px;
 }
 
 /* INTRO */
@@ -46,15 +47,11 @@ animation:zoom 3s forwards;
 100%{transform:scale(1)}
 }
 
-/* HEADER */
-
 .header{
 font-size:28px;
 margin-top:20px;
 text-shadow:0 0 20px pink;
 }
-
-/* CARD */
 
 .card{
 background:rgba(255,255,255,0.06);
@@ -66,26 +63,9 @@ width:90%;
 max-width:500px;
 }
 
-/* TYPING */
-
 #typing{
 color:pink;
 min-height:30px;
-}
-
-/* STARS */
-
-.star{
-position:fixed;
-width:2px;
-height:80px;
-background:linear-gradient(white,transparent);
-animation:shoot 4s linear infinite;
-}
-
-@keyframes shoot{
-0%{transform:translateY(-100px)}
-100%{transform:translateY(100vh) translateX(200px)}
 }
 
 /* HEARTS */
@@ -102,29 +82,25 @@ animation:float 6s linear infinite;
 100%{transform:translateY(-10vh)}
 }
 
-/* CAROUSEL */
+/* 3D CAROUSEL */
 
 .carousel{
-width:260px;
-height:340px;
-margin:40px auto;
+width:240px;
+height:300px;
+margin:60px auto;
 position:relative;
 transform-style:preserve-3d;
-animation:rotate 50s linear infinite;
-perspective:1000px;
-display:flex;
-justify-content:center;
-align-items:center;
+animation:rotate 40s linear infinite;
 }
 
 .carousel img{
 position:absolute;
-width:190px;
-height:250px;
+width:180px;
+height:240px;
 left:50%;
 top:50%;
-margin-left:-85px;
-margin-top:-115px;
+margin-left:-90px;
+margin-top:-120px;
 border-radius:15px;
 object-fit:cover;
 box-shadow:0 0 15px pink;
@@ -212,7 +188,6 @@ left:0;
 width:100%;
 height:100%;
 background:rgba(0,0,0,.8);
-display:flex;
 justify-content:center;
 align-items:center;
 }
@@ -320,53 +295,27 @@ setTimeout(()=>{
 document.getElementById("intro").style.display="none"
 },3000)
 
-/* STARS */
-
-for(let i=0;i<20;i++){
-
-let s=document.createElement("div")
-
-s.className="star"
-
-s.style.left=Math.random()*100+"vw"
-
-s.style.animationDelay=Math.random()*5+"s"
-
-document.body.appendChild(s)
-
-}
-
 /* LOVE COUNTER */
 
 let start=new Date("2018-06-19")
 
 setInterval(()=>{
-
 let now=new Date()
-
 let d=Math.floor((now-start)/(1000*60*60*24))
-
 document.getElementById("love").innerHTML=d+" days ❤️"
-
 },1000)
 
 /* TYPING */
 
 const text="You are the most beautiful part of my life ❤️"
-let i=0
+let t=0
 
 function typing(){
-
-if(i<text.length){
-
-document.getElementById("typing").innerHTML+=text.charAt(i)
-
-i++
-
+if(t<text.length){
+document.getElementById("typing").innerHTML+=text.charAt(t)
+t++
 setTimeout(typing,80)
-
 }
-
 }
 
 typing()
@@ -374,30 +323,21 @@ typing()
 /* HEARTS */
 
 setInterval(()=>{
-
 let h=document.createElement("div")
-
 h.className="heart"
-
 h.innerHTML="❤️"
-
 h.style.left=Math.random()*100+"vw"
-
 document.body.appendChild(h)
-
 setTimeout(()=>h.remove(),6000)
-
 },500)
 
-/* CAROUSEL */
+/* 3D CAROUSEL */
 
 const carousel=document.getElementById("carousel")
 
 const total=20
-
 const theta=360/total
-
-const radius=110
+const radius=140
 
 for(let i=1;i<=total;i++){
 
@@ -408,11 +348,8 @@ img.src=i+".jpg"
 img.style.transform=`rotateY(${i*theta}deg) translateZ(${radius}px)`
 
 img.onclick=()=>{
-
 modal.style.display="flex"
-
 modalImg.src=img.src
-
 }
 
 carousel.appendChild(img)
@@ -422,7 +359,6 @@ carousel.appendChild(img)
 /* MODAL */
 
 const modal=document.getElementById("modal")
-
 const modalImg=document.getElementById("modalImg")
 
 modal.onclick=()=>modal.style.display="none"
@@ -440,25 +376,19 @@ years.forEach((y,i)=>{
 let angle=(i/years.length)*2*Math.PI
 
 let x=130+r*Math.cos(angle)-20
-
 let yPos=130+r*Math.sin(angle)-20
 
 let div=document.createElement("div")
 
 div.className="milestone"
-
 div.innerHTML=y
 
 div.style.left=x+"px"
-
 div.style.top=yPos+"px"
 
 div.onclick=()=>{
-
 modal.style.display="flex"
-
 modalImg.src=(i*2+1)+".jpg"
-
 }
 
 map.appendChild(div)
@@ -468,45 +398,33 @@ map.appendChild(div)
 /* CONFETTI */
 
 setTimeout(()=>{
-
 confetti({particleCount:200,spread:120})
-
 },4000)
 
 /* PROPOSAL */
 
 setTimeout(()=>{
-
 document.getElementById("proposal").style.display="flex"
-
 },8000)
 
 /* YES */
 
 function yes(){
-
 document.getElementById("proposal").style.display="none"
-
 document.getElementById("cake").style.display="block"
-
 confetti({particleCount:400,spread:180})
-
 }
 
 /* CLOSE */
 
 function closeP(){
-
 document.getElementById("proposal").style.display="none"
-
 }
 
 /* MUSIC */
 
 document.body.onclick=()=>{
-
 document.getElementById("music").play()
-
 }
 
 </script>
