@@ -9,6 +9,15 @@
 
 <style>
 
+body{
+margin:0;
+font-family:sans-serif;
+background:black;
+color:white;
+text-align:center;
+overflow-x:hidden;
+}
+
 /* INTRO */
 
 #intro{
@@ -32,35 +41,9 @@ animation:zoom 3s forwards;
 }
 
 @keyframes zoom{
-0%{transform:scale(0);opacity:0}
+0%{transform:scale(0)}
 50%{transform:scale(1.2)}
-100%{transform:scale(1);opacity:1}
-}
-
-/* BODY */
-
-body{
-margin:0;
-font-family:sans-serif;
-color:white;
-text-align:center;
-overflow-x:hidden;
-background:black;
-}
-
-/* SHOOTING STARS */
-
-.star{
-position:fixed;
-width:2px;
-height:80px;
-background:linear-gradient(white,transparent);
-animation:shoot 4s linear infinite;
-}
-
-@keyframes shoot{
-0%{transform:translateY(-100px)}
-100%{transform:translateY(100vh) translateX(200px)}
+100%{transform:scale(1)}
 }
 
 /* HEADER */
@@ -83,15 +66,53 @@ width:90%;
 max-width:500px;
 }
 
-/* 3D CAROUSEL */
+/* TYPING */
+
+#typing{
+font-size:18px;
+color:pink;
+min-height:30px;
+}
+
+/* STARS */
+
+.star{
+position:fixed;
+width:2px;
+height:80px;
+background:linear-gradient(white,transparent);
+animation:shoot 4s linear infinite;
+}
+
+@keyframes shoot{
+0%{transform:translateY(-100px)}
+100%{transform:translateY(100vh) translateX(200px)}
+}
+
+/* HEART */
+
+.heart{
+position:fixed;
+color:pink;
+font-size:20px;
+animation:float 6s linear infinite;
+}
+
+@keyframes float{
+0%{transform:translateY(100vh)}
+100%{transform:translateY(-10vh)}
+}
+
+/* CAROUSEL */
 
 .carousel{
-width:240px;
-height:320px;
+width:260px;
+height:340px;
 margin:40px auto;
 position:relative;
 transform-style:preserve-3d;
 animation:rotate 60s linear infinite;
+perspective:1200px;
 }
 
 .carousel img{
@@ -113,18 +134,25 @@ from{transform:rotateY(0)}
 to{transform:rotateY(360deg)}
 }
 
-/* HEART FLOAT */
+/* MODAL */
 
-.heart{
+.modal{
+display:none;
 position:fixed;
-color:pink;
-font-size:20px;
-animation:float 6s linear infinite;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:black;
+justify-content:center;
+align-items:center;
+z-index:999;
 }
 
-@keyframes float{
-0%{transform:translateY(100vh)}
-100%{transform:translateY(-10vh)}
+.modal img{
+max-width:90%;
+max-height:90%;
+border-radius:10px;
 }
 
 /* ROADMAP */
@@ -157,29 +185,7 @@ border-radius:50%;
 display:flex;
 align-items:center;
 justify-content:center;
-cursor:pointer;
 font-size:12px;
-}
-
-/* MODAL */
-
-.modal{
-display:none;
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:black;
-justify-content:center;
-align-items:center;
-z-index:999;
-}
-
-.modal img{
-max-width:90%;
-max-height:90%;
-border-radius:10px;
 }
 
 /* ENVELOPE */
@@ -203,9 +209,9 @@ left:0;
 width:100%;
 height:100%;
 background:rgba(0,0,0,.8);
+display:flex;
 justify-content:center;
 align-items:center;
-z-index:1000;
 }
 
 .box{
@@ -223,6 +229,20 @@ color:white;
 margin:10px;
 }
 
+/* CAKE */
+
+#cake{
+display:none;
+font-size:60px;
+margin-top:20px;
+animation:bounce 1s infinite;
+}
+
+@keyframes bounce{
+0%,100%{transform:translateY(0)}
+50%{transform:translateY(-10px)}
+}
+
 </style>
 
 </head>
@@ -230,21 +250,21 @@ margin:10px;
 <body>
 
 <div id="intro">
-<h1>HAPPY BIRTHDAY MERI JAAN</h1>
+<h1>AYESHA</h1>
 </div>
 
 <h1 class="header">Happy Birthday Ayesha ❤️</h1>
 
 <div class="card">
+
 <h3>Loving You Since</h3>
 <div id="love"></div>
+
+<div id="typing"></div>
+
 </div>
 
-<!-- CAROUSEL -->
-
 <div class="carousel" id="carousel"></div>
-
-<!-- ROADMAP -->
 
 <div class="card">
 
@@ -258,8 +278,6 @@ margin:10px;
 
 </div>
 
-<!-- LETTER -->
-
 <div class="card">
 
 <h3>Secret Letter</h3>
@@ -270,11 +288,11 @@ Open Letter
 
 </div>
 
+<div id="cake">🎂</div>
+
 <div class="modal" id="modal">
 <img id="modalImg">
 </div>
-
-<!-- PROPOSAL -->
 
 <div id="proposal">
 
@@ -331,6 +349,27 @@ document.getElementById("love").innerHTML=d+" days ❤️"
 
 },1000)
 
+/* TYPING EFFECT */
+
+const text="You are the most beautiful part of my life ❤️"
+let i=0
+
+function typing(){
+
+if(i<text.length){
+
+document.getElementById("typing").innerHTML+=text.charAt(i)
+
+i++
+
+setTimeout(typing,80)
+
+}
+
+}
+
+typing()
+
 /* HEARTS */
 
 setInterval(()=>{
@@ -355,7 +394,9 @@ const carousel=document.getElementById("carousel")
 
 const total=50
 
-const deg=360/total
+const theta=360/total
+
+const radius=260
 
 for(let i=1;i<=total;i++){
 
@@ -363,7 +404,7 @@ let img=document.createElement("img")
 
 img.src=i+".jpg"
 
-img.style.transform=`rotateY(${i*deg}deg) translateZ(320px)`
+img.style.transform=`rotateY(${i*theta}deg) translateZ(${radius}px)`
 
 img.onclick=()=>{
 
@@ -380,6 +421,7 @@ carousel.appendChild(img)
 /* MODAL */
 
 const modal=document.getElementById("modal")
+
 const modalImg=document.getElementById("modalImg")
 
 modal.onclick=()=>modal.style.display="none"
@@ -410,14 +452,6 @@ div.style.left=x+"px"
 
 div.style.top=yPos+"px"
 
-div.onclick=()=>{
-
-modal.style.display="flex"
-
-modalImg.src=(i*6+1)+".jpg"
-
-}
-
 map.appendChild(div)
 
 })
@@ -425,27 +459,45 @@ map.appendChild(div)
 /* CONFETTI */
 
 setTimeout(()=>{
+
 confetti({particleCount:200,spread:120})
+
 },4000)
 
 /* PROPOSAL */
 
 setTimeout(()=>{
+
 document.getElementById("proposal").style.display="flex"
+
 },8000)
 
+/* YES BUTTON */
+
 function yes(){
-alert("She said YES ❤️💍")
+
+document.getElementById("proposal").style.display="none"
+
+document.getElementById("cake").style.display="block"
+
+confetti({particleCount:400,spread:180})
+
 }
 
+/* CLOSE */
+
 function closeP(){
+
 document.getElementById("proposal").style.display="none"
+
 }
 
 /* MUSIC */
 
 document.body.onclick=()=>{
+
 document.getElementById("music").play()
+
 }
 
 </script>
