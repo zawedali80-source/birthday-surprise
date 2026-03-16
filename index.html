@@ -68,13 +68,14 @@ text-shadow:0 0 20px pink;
 }
 
 .card{
-background:rgba(255,255,255,0.05);
+background:rgba(255,255,255,0.06);
+backdrop-filter:blur(12px);
+border-radius:20px;
 padding:20px;
 margin:20px auto;
-width:90%;
-max-width:500px;
-border-radius:20px;
-box-shadow:0 0 20px #ff4da6;
+width:100%;
+max-width:600px;
+box-sizing:border-box;
 }
 
 /* 3D CAROUSEL */
@@ -90,8 +91,8 @@ animation:rotate 25s linear infinite;
 
 .carousel img{
 position:absolute;
-width:200px;
-height:260px;
+width:100%;
+height:auto;
 left:10px;
 top:0;
 border-radius:15px;
