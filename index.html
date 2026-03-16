@@ -3,95 +3,120 @@
 <head>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
 <title>Happy Birthday Ayesha ❤️</title>
-
-<script src="https://cdn.tailwindcss.com"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
 <style>
 
-/* GALAXY BACKGROUND */
+/* NETFLIX INTRO */
 
-body{
-margin:0;
-font-family:'Segoe UI',sans-serif;
-color:white;
-text-align:center;
-overflow-x:hidden;
-background: radial-gradient(circle at bottom,#020111 0%,#000000 70%);
-}
-
-body:before{
-content:"";
+#intro{
 position:fixed;
 top:0;
 left:0;
 width:100%;
 height:100%;
-background-image:
-radial-gradient(2px 2px at 20px 30px,#fff,transparent),
-radial-gradient(2px 2px at 40px 70px,#ff77bf,transparent),
-radial-gradient(1px 1px at 90px 40px,#fff,transparent),
-radial-gradient(1px 1px at 130px 80px,#ff77bf,transparent);
-background-size:200px 200px;
-animation:stars 60s linear infinite;
-z-index:-1;
+background:black;
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:9999;
 }
 
-@keyframes stars{
-from{transform:translateY(0)}
-to{transform:translateY(-2000px)}
+#intro h1{
+color:#ff4da6;
+font-size:60px;
+letter-spacing:8px;
+animation:zoom 3s forwards;
+}
+
+@keyframes zoom{
+0%{transform:scale(0);opacity:0}
+50%{transform:scale(1.2)}
+100%{transform:scale(1);opacity:1}
+}
+
+/* GALAXY BACKGROUND */
+
+body{
+margin:0;
+font-family:sans-serif;
+color:white;
+text-align:center;
+overflow-x:hidden;
+background:black;
+}
+
+.star{
+position:fixed;
+width:2px;
+height:80px;
+background:linear-gradient(white,transparent);
+animation:shoot 4s linear infinite;
+}
+
+@keyframes shoot{
+0%{transform:translateY(-100px) translateX(0)}
+100%{transform:translateY(100vh) translateX(200px)}
 }
 
 .header{
 font-size:32px;
-font-weight:bold;
 margin-top:20px;
-text-shadow:0 0 20px #ff77bf;
+text-shadow:0 0 20px pink;
 }
-
-/* CARD */
 
 .card{
-background:rgba(255,255,255,0.06);
-backdrop-filter:blur(12px);
-border-radius:20px;
+background:rgba(255,255,255,0.05);
 padding:20px;
 margin:20px auto;
-width:92%;
+width:90%;
 max-width:500px;
-border:1px solid rgba(255,255,255,0.1);
-box-shadow:0 0 30px rgba(255,77,166,0.3);
+border-radius:20px;
+box-shadow:0 0 20px #ff4da6;
 }
 
-/* CAROUSEL */
+/* 3D CAROUSEL */
 
 .carousel{
-width:100%;
-overflow:hidden;
+width:220px;
+height:260px;
+margin:40px auto;
+position:relative;
+transform-style:preserve-3d;
+animation:rotate 25s linear infinite;
 }
 
-.carousel-track{
-display:flex;
-transition:transform .6s ease;
-}
-
-.carousel-track img{
-flex:0 0 auto;
-width:180px;
-height:250px;
-margin:0 8px;
-border-radius:14px;
+.carousel img{
+position:absolute;
+width:200px;
+height:260px;
+left:10px;
+top:0;
+border-radius:15px;
 object-fit:cover;
-box-shadow:0 0 20px rgba(255,77,166,0.6);
+box-shadow:0 0 20px pink;
 cursor:pointer;
-transition:.3s;
 }
 
-.carousel-track img.active{
-transform:scale(1.25);
+@keyframes rotate{
+from{transform:rotateY(0)}
+to{transform:rotateY(360deg)}
+}
+
+/* HEART */
+
+.heart{
+position:fixed;
+color:pink;
+font-size:20px;
+animation:float 6s linear infinite;
+}
+
+@keyframes float{
+0%{transform:translateY(100vh)}
+100%{transform:translateY(-10vh)}
 }
 
 /* ROADMAP */
@@ -103,7 +128,7 @@ height:300px;
 margin:30px auto;
 }
 
-.road-path{
+.road{
 position:absolute;
 top:50%;
 left:50%;
@@ -111,65 +136,23 @@ width:240px;
 height:240px;
 margin-left:-120px;
 margin-top:-120px;
+border:3px dashed pink;
 border-radius:50%;
-border:3px dashed #ff4da6;
-box-shadow:0 0 20px #ff77bf;
 }
 
 .milestone{
 position:absolute;
-width:55px;
-height:55px;
-background:linear-gradient(45deg,#ff4da6,#ff77bf);
+width:50px;
+height:50px;
+background:pink;
 border-radius:50%;
 display:flex;
 align-items:center;
 justify-content:center;
 cursor:pointer;
-box-shadow:0 0 15px #ff77bf;
-font-size:12px;
 }
 
-/* FLOAT HEARTS */
-
-.heart{
-position:fixed;
-color:#ff77bf;
-animation:float 6s linear infinite;
-font-size:20px;
-}
-
-@keyframes float{
-0%{transform:translateY(100vh);}
-100%{transform:translateY(-10vh);}
-}
-
-.message{
-font-size:16px;
-line-height:1.7;
-white-space:pre-line;
-text-shadow:0 0 6px #ff77bf;
-}
-
-/* ENVELOPE */
-
-.envelope{
-margin-top:15px;
-width:160px;
-height:55px;
-border-radius:10px;
-background:linear-gradient(45deg,#ff4da6,#ff77bf);
-color:white;
-cursor:pointer;
-box-shadow:0 0 20px #ff77bf;
-display:flex;
-align-items:center;
-justify-content:center;
-font-weight:bold;
-margin:auto;
-}
-
-/* IMAGE MODAL */
+/* MODAL */
 
 .modal{
 display:none;
@@ -181,45 +164,52 @@ height:100%;
 background:black;
 justify-content:center;
 align-items:center;
-z-index:1000;
 }
 
 .modal img{
 max-width:90%;
 max-height:90%;
-border-radius:12px;
+border-radius:10px;
+}
+
+/* ENVELOPE */
+
+.envelope{
+background:pink;
+padding:15px 30px;
+border-radius:10px;
+cursor:pointer;
+margin:auto;
+width:160px;
 }
 
 /* PROPOSAL */
 
 #proposal{
+display:none;
 position:fixed;
 top:0;
 left:0;
 width:100%;
 height:100%;
 background:rgba(0,0,0,.8);
-display:none;
 justify-content:center;
 align-items:center;
-z-index:2000;
 }
 
-.proposal-box{
+.box{
 background:#111;
 padding:30px;
 border-radius:20px;
-box-shadow:0 0 30px #ff4da6;
 }
 
 button{
-background:#ff4da6;
-border:none;
 padding:10px 20px;
-margin:10px;
+border:none;
 border-radius:10px;
+background:pink;
 color:white;
-cursor:pointer;
+margin:10px;
 }
 
 </style>
@@ -228,60 +218,47 @@ cursor:pointer;
 
 <body>
 
-<div class="header">Happy Birthday Ayesha ❤️</div>
+<!-- INTRO -->
 
-<div class="card">
-<h3>❤️ Loving You Since</h3>
-<div id="loveTime"></div>
+<div id="intro">
+<h1>AYESHA</h1>
 </div>
 
-<!-- CAROUSEL -->
-
-<div class="card">
-
-<h2 class="text-pink-400 mb-4 text-xl">Our Memories ❤️</h2>
-
-<div class="carousel">
-
-<div class="carousel-track" id="carouselTrack">
-
-<!-- 50 PHOTOS -->
-
-<script>
-for(let i=1;i<=50;i++){
-document.write(`<img src="${i}.jpg">`)
-}
-</script>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- LOVE JOURNEY -->
+<h1 class="header">Happy Birthday Ayesha ❤️</h1>
 
 <div class="card">
 
-<h2 class="text-xl text-pink-400 mb-4">Our Journey ❤️</h2>
+<h3>Loving You Since</h3>
+
+<div id="love"></div>
+
+</div>
+
+<!-- 3D CAROUSEL -->
+
+<div class="carousel" id="carousel"></div>
+
+<!-- ROADMAP -->
+
+<div class="card">
+
+<h2>Our Journey ❤️</h2>
 
 <div class="love-map">
-<div class="road-path"></div>
-</div>
+
+<div class="road"></div>
 
 </div>
 
-<div class="card">
-<div class="message" id="type"></div>
 </div>
 
 <!-- ENVELOPE -->
 
 <div class="card">
 
-<h3>💌 Secret Letter</h3>
+<h3>Secret Letter</h3>
 
-<div class="envelope" onclick="window.location.href='letter.html'">
+<div class="envelope" onclick="window.location='letter.html'">
 Open Letter
 </div>
 
@@ -295,31 +272,44 @@ Open Letter
 
 <div id="proposal">
 
-<div class="proposal-box">
+<div class="box">
 
-<h2 style="font-size:26px;margin-bottom:20px;">
-Ayesha ❤️<br>Will You Marry Me?
-</h2>
+<h2>Will You Marry Me ❤️</h2>
 
-<button onclick="acceptLove()">Yes ❤️</button>
-
-<button onclick="closeProposal()">Later</button>
+<button onclick="yes()">Yes</button>
+<button onclick="closeP()">Later</button>
 
 </div>
 
 </div>
 
-<audio id="bgMusic" loop>
-<source src="music.mp3" type="audio/mpeg">
+<audio id="music" loop>
+<source src="music.mp3">
 </audio>
 
 <script>
 
-/* CONFETTI */
+/* INTRO REMOVE */
 
 setTimeout(()=>{
-confetti({particleCount:200,spread:120,origin:{y:.6}})
-},1500)
+document.getElementById("intro").style.display="none"
+},3000)
+
+/* SHOOTING STARS */
+
+for(let i=0;i<20;i++){
+
+let s=document.createElement("div")
+
+s.className="star"
+
+s.style.left=Math.random()*100+"vw"
+
+s.style.animationDelay=Math.random()*5+"s"
+
+document.body.appendChild(s)
+
+}
 
 /* LOVE COUNTER */
 
@@ -329,15 +319,15 @@ setInterval(()=>{
 
 let now=new Date()
 
-let days=Math.floor((now-start)/(1000*60*60*24))
+let d=Math.floor((now-start)/(1000*60*60*24))
 
-document.getElementById("loveTime").innerHTML=days+" days ❤️"
+document.getElementById("love").innerHTML=d+" days ❤️"
 
 },1000)
 
-/* FLOAT HEARTS */
+/* HEARTS */
 
-function heart(){
+setInterval(()=>{
 
 let h=document.createElement("div")
 
@@ -351,73 +341,23 @@ document.body.appendChild(h)
 
 setTimeout(()=>h.remove(),6000)
 
-}
+},500)
 
-setInterval(heart,500)
+/* 3D CAROUSEL */
 
-/* MESSAGE */
+const carousel=document.getElementById("carousel")
 
-let text=`From our teenage chaos to who we are today…
+const total=50
 
-We argued, cried, walked away many times.
+const deg=360/total
 
-Yet somehow our love always found its way back.
+for(let i=1;i<=total;i++){
 
-7 years later, my heart still chooses only you Ayesha ❤️`
+let img=document.createElement("img")
 
-let n=0
+img.src=i+".jpg"
 
-function typing(){
-
-if(n<text.length){
-
-document.getElementById("type").innerHTML+=text.charAt(n)
-
-n++
-
-setTimeout(typing,60)
-
-}
-
-}
-
-typing()
-
-/* CAROUSEL */
-
-const track=document.getElementById("carouselTrack")
-
-const images=document.querySelectorAll("#carouselTrack img")
-
-let index=0
-
-function updateCarousel(){
-
-images.forEach(img=>img.classList.remove("active"))
-
-images[index].classList.add("active")
-
-let width=images[0].offsetWidth+16
-
-track.style.transform=`translateX(${-index*width}px)`
-
-index++
-
-if(index>=images.length)index=0
-
-}
-
-setInterval(updateCarousel,2500)
-
-updateCarousel()
-
-/* MODAL */
-
-const modal=document.getElementById("modal")
-
-const modalImg=document.getElementById("modalImg")
-
-images.forEach(img=>{
+img.style.transform=`rotateY(${i*deg}deg) translateZ(400px)`
 
 img.onclick=()=>{
 
@@ -427,52 +367,48 @@ modalImg.src=img.src
 
 }
 
-})
+carousel.appendChild(img)
+
+}
+
+/* MODAL */
+
+const modal=document.getElementById("modal")
+const modalImg=document.getElementById("modalImg")
 
 modal.onclick=()=>modal.style.display="none"
 
 /* ROADMAP */
 
-const milestones=[
-
-{year:"2018",img:"1.jpg"},
-{year:"2019",img:"10.jpg"},
-{year:"2020",img:"20.jpg"},
-{year:"2021",img:"25.jpg"},
-{year:"2022",img:"30.jpg"},
-{year:"2023",img:"35.jpg"},
-{year:"2024",img:"40.jpg"},
-{year:"2025",img:"50.jpg"}
-
-]
+const years=[2018,2019,2020,2021,2022,2023,2024,2025]
 
 const map=document.querySelector(".love-map")
 
-const radius=110
+const r=110
 
-milestones.forEach((m,i)=>{
+years.forEach((y,i)=>{
 
-const angle=(i/milestones.length)*2*Math.PI
+let angle=(i/years.length)*2*Math.PI
 
-const x=150+radius*Math.cos(angle)-25
+let x=150+r*Math.cos(angle)-25
 
-const y=150+radius*Math.sin(angle)-25
+let yPos=150+r*Math.sin(angle)-25
 
-const div=document.createElement("div")
+let div=document.createElement("div")
 
 div.className="milestone"
 
+div.innerHTML=y
+
 div.style.left=x+"px"
 
-div.style.top=y+"px"
-
-div.innerHTML=m.year
+div.style.top=yPos+"px"
 
 div.onclick=()=>{
 
 modal.style.display="flex"
 
-modalImg.src=m.img
+modalImg.src=(i*6+1)+".jpg"
 
 }
 
@@ -480,38 +416,41 @@ map.appendChild(div)
 
 })
 
+/* CONFETTI */
+
+setTimeout(()=>{
+confetti({particleCount:200,spread:120})
+},4000)
+
 /* PROPOSAL */
 
 setTimeout(()=>{
 
 document.getElementById("proposal").style.display="flex"
 
-},6000)
+},8000)
 
-function closeProposal(){
-
-document.getElementById("proposal").style.display="none"
-
-}
-
-function acceptLove(){
+function yes(){
 
 alert("She said YES ❤️💍")
 
 }
 
+function closeP(){
+
+document.getElementById("proposal").style.display="none"
+
+}
+
 /* MUSIC */
 
-const bgMusic=document.getElementById("bgMusic")
+document.body.onclick=()=>{
 
-document.body.addEventListener("click",()=>{
+document.getElementById("music").play()
 
-bgMusic.play()
-
-},{once:true})
+}
 
 </script>
 
 </body>
-
 </html>
