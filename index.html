@@ -84,32 +84,35 @@ animation:float 6s linear infinite;
 
 /* 3D CAROUSEL */
 
-.carousel{
-width:240px;
-height:300px;
-margin:60px auto;
-position:relative;
-transform-style:preserve-3d;
-animation:rotate 40s linear infinite;
+.carousel {
+  width: 300px;
+  height: 400px;
+  margin: 60px auto;
+  perspective: 1200px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 15px;
+  box-shadow: 0 0 40px rgba(255,105,180,0.5);
+  background: black;
 }
 
-.carousel img{
-position:absolute;
-width:180px;
-height:240px;
-left:50%;
-top:50%;
-margin-left:-90px;
-margin-top:-120px;
-border-radius:15px;
-object-fit:cover;
-box-shadow:0 0 15px pink;
-cursor:pointer;
+.carousel-img {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  object-fit: cover;
+  border-radius: 15px;
+  opacity: 0;
+  transform: rotateY(20deg) scale(0.95);
+  transition: opacity 1s ease, transform 1s ease;
+  cursor: pointer;
 }
-
-@keyframes rotate{
-from{transform:rotateY(0)}
-to{transform:rotateY(360deg)}
+.carousel-img.active {
+  opacity: 1;
+  transform: rotateY(0deg) scale(1);
+  z-index: 1;
 }
 
 /* MODAL */
@@ -242,7 +245,61 @@ animation:bounce 1s infinite;
 
 </div>
 
-<div class="carousel" id="carousel"></div>
+<div class="carousel" id="carousel">
+  <img src="1.jpg" class="carousel-img">
+  <img src="2.jpg" class="carousel-img">
+  <img src="3.jpg" class="carousel-img">
+  <img src="4.jpg" class="carousel-img">
+  <img src="51.jpg" class="carousel-img">
+  <img src="6.jpg" class="carousel-img">
+  <img src="7.jpg" class="carousel-img">
+  <img src="8.jpg" class="carousel-img">
+  <img src="9.jpg" class="carousel-img">
+  <img src="10.jpg" class="carousel-img">
+  <img src="11.jpg" class="carousel-img">
+  <img src="12(2).jpg" class="carousel-img">
+  <img src="13.jpg" class="carousel-img">
+  <img src="14.jpg" class="carousel-img">
+  <img src="15.jpg" class="carousel-img">
+  <img src="16.jpg" class="carousel-img">
+  <img src="17.jpg" class="carousel-img">
+  <img src="18.jpg" class="carousel-img">
+  <img src="19.jpg" class="carousel-img">
+  <img src="20.jpg" class="carousel-img">
+  <img src="21.jpg" class="carousel-img">
+  <img src="22.jpg" class="carousel-img">
+  <img src="23.jpg" class="carousel-img">
+  <img src="24.jpg" class="carousel-img">
+  <img src="25.jpg" class="carousel-img">
+  <img src="26.jpg" class="carousel-img">
+  <img src="27.jpg" class="carousel-img">
+  <img src="28.jpg" class="carousel-img">
+  <img src="29.jpg" class="carousel-img">
+  <img src="30.jpg" class="carousel-img">
+  <img src="31.jpg" class="carousel-img">
+  <img src="32.jpg" class="carousel-img">
+  <img src="33.jpg" class="carousel-img">
+  <img src="34.jpg" class="carousel-img">
+  <img src="35.jpg" class="carousel-img">
+  <img src="36.jpg" class="carousel-img">
+  <img src="37.jpg" class="carousel-img">
+  <img src="38.jpg" class="carousel-img">
+  <img src="39.jpg" class="carousel-img">
+  <img src="40.jpg" class="carousel-img">
+  <img src="41.jpg" class="carousel-img">
+  <img src="42.jpg" class="carousel-img">
+  <img src="43.jpg" class="carousel-img">
+  <img src="44.jpg" class="carousel-img">
+  <img src="45.jpg" class="carousel-img">
+  <img src="46.jpg" class="carousel-img">
+  <img src="47.jpg" class="carousel-img">
+  <img src="48.jpg" class="carousel-img">
+  <img src="49.jpg" class="carousel-img">
+  <img src="50.jpg" class="carousel-img">
+
+
+
+</div>
 
 <div class="card">
 
@@ -333,29 +390,27 @@ setTimeout(()=>h.remove(),6000)
 
 /* 3D CAROUSEL */
 
-const carousel=document.getElementById("carousel")
 
-const total=20
-const theta=360/total
-const radius=140
+const carouselImages = document.querySelectorAll('.carousel-img');
+let currentIndex = 0;
 
-for(let i=1;i<=total;i++){
-
-let img=document.createElement("img")
-
-img.src=i+".jpg"
-
-img.style.transform=`rotateY(${i*theta}deg) translateZ(${radius}px)`
-
-img.onclick=()=>{
-modal.style.display="flex"
-modalImg.src=img.src
+function showNext() {
+  carouselImages.forEach((img, idx) => img.classList.remove('active'));
+  carouselImages[currentIndex].classList.add('active');
+  currentIndex = (currentIndex + 1) % carouselImages.length;
 }
 
-carousel.appendChild(img)
+// click to open modal
+carouselImages.forEach(img => {
+  img.addEventListener('click', () => {
+    modal.style.display = 'flex';
+    modalImg.src = img.src;
+  });
+});
 
-}
-
+// start carousel
+showNext();
+setInterval(showNext, 3000);
 /* MODAL */
 
 const modal=document.getElementById("modal")
@@ -370,6 +425,16 @@ const years=[2018,2019,2020,2021,2022,2023,2024,2025]
 const map=document.querySelector(".love-map")
 
 const r=90
+const milestoneImages = [
+  "9289.jpg",
+  "9812.jpg",
+  "9956.jpg",
+  "10145.jpg",
+  "10254.jpg",
+  "10307.jpg",
+  "98.jpeg",
+  "99.jpeg"
+];
 
 years.forEach((y,i)=>{
 
@@ -388,8 +453,8 @@ div.style.top=yPos+"px"
 
 div.onclick=()=>{
 modal.style.display="flex"
-modalImg.src=(i*2+1)+".jpg"
-}
+ modalImg.src = milestoneImages[i];
+} 
 
 map.appendChild(div)
 
