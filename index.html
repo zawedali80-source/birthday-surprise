@@ -223,7 +223,48 @@ animation:bounce 1s infinite;
 0%,100%{transform:translateY(0)}
 50%{transform:translateY(-10px)}
 }
+@media(max-width:600px){
+  /* Header smaller on mobile */
+  .header { font-size:24px; }
 
+  /* Card adjustments */
+  .card {
+    width:95%;
+    padding:15px;
+    margin:15px auto;
+  }
+
+  /* Typing text smaller */
+  #typing { font-size:16px; }
+
+  /* Carousel smaller */
+  .carousel { width:90%; height:250px; }
+  .carousel-img { border-radius:12px; }
+
+  /* Envelope smaller */
+  .envelope { width:150px; padding:12px 25px; }
+
+  /* Love map smaller */
+  .love-map { width:180px; height:180px; }
+  .road { width:140px; height:140px; margin-left:-70px; margin-top:-70px; }
+  .milestone { width:35px; height:35px; font-size:12px; }
+
+  /* Cake emoji smaller */
+  #cake { font-size:70px; }
+
+  /* Hearts smaller */
+  .heart { font-size:14px; }
+
+  /* Intro H1 smaller */
+  #intro h1 { font-size:50px; letter-spacing:5px; }
+
+  /* Modal image max size */
+  .modal img { max-width:95%; max-height:80%; }
+
+  /* Proposal box smaller */
+  #proposal .box { padding:20px; width:90%; }
+  button { padding:8px 16px; font-size:14px; }
+}
 </style>
 
 </head>
