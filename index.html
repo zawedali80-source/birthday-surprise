@@ -1,289 +1,185 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Happy Birthday Ayesha ❤️</title>
-
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-
 <style>
-
 body{
-margin:0;
-font-family:sans-serif;
-background:black;
-color:white;
-text-align:center;
-overflow-x:hidden;
-perspective:1200px;
+  margin:0;
+  font-family:sans-serif;
+  background:radial-gradient(ellipse at bottom, #0b0c27 0%, #000000 100%);
+  color: #fff0f5;
+  text-align:center;
+  overflow-x:hidden;
+  perspective:1200px;
 }
 
-/* INTRO */
+/* --- STAR CANVAS --- */
+#stars{
+  position:fixed; top:-800; left:0;
+  width:100%; height:100%;
+  z-index:-2;
+  background:black;
+}
 
+/* --- SPARKLE CANVAS --- */
+#sparkle{
+  position:fixed; top:-800px; left:0;
+  width:100%; height:100%;
+  z-index:-1;
+  pointer-events:none;
+
+}
+
+/* --- INTRO --- */
 #intro{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:black;
-display:flex;
-justify-content:center;
-align-items:center;
-z-index:9999;
+  position:fixed; 
+  top:0; left:0; 
+  width:100%; height:100%;
+  display:flex; 
+  justify-content:center; 
+  align-items:center;
+  background:black; 
+  z-index:9999;
 }
-
 #intro h1{
-color:#ff4da6;
-font-size:50px;
-letter-spacing:8px;
-animation:zoom 3s forwards;
+  color:#ff4da6; 
+  font-size:70px;
+  letter-spacing:10px;
+  animation:zoom 3s forwards;
+  text-shadow:0 0 20px #ff99cc, 0 0 50px #ff4da6, 0 0 80px #ff66b2;
 }
+@keyframes zoom{0%{transform:scale(0)}50%{transform:scale(1.2)}100%{transform:scale(1)}}
 
-@keyframes zoom{
-0%{transform:scale(0)}
-50%{transform:scale(1.2)}
-100%{transform:scale(1)}
-}
-
+/* --- HEADERS --- */
 .header{
-font-size:28px;
-margin-top:20px;
-text-shadow:0 0 20px pink;
+  font-size:36px;
+  margin-top:10px;
+  color: #ff99cc;
+  text-shadow:0 0 20px #ff4da6, 0 0 50px #ff66b2;
 }
 
+/* --- CARDS --- */
 .card{
-background:rgba(255,255,255,0.06);
-backdrop-filter:blur(10px);
-border-radius:20px;
-padding:20px;
-margin:20px auto;
-width:90%;
-max-width:500px;
+  background:rgba(255,20,147,0.05);
+  backdrop-filter:blur(15px);
+  border-radius:20px;
+  padding:20px;
+  margin:20px auto;
+  width:90%;
+  max-width:500px;
+  border-radius: 25px;
+box-shadow: 0 0 30px rgba(255, 105, 180, 0.2);
 }
 
+/* --- TYPING --- */
 #typing{
-color:pink;
-min-height:30px;
+  color:pink; 
+  font-size: 18px;
+font-weight: 500;
+  min-height:30px;
 }
+#typing::after{ content:'|'; animation:blink 1s infinite; }
+@keyframes blink{0%,50%,100%{opacity:1;}25%,75%{opacity:0;}}
 
-/* HEARTS */
-
+/* --- HEARTS --- */
 .heart{
-position:fixed;
-color:pink;
-font-size:20px;
-animation:float 6s linear infinite;
+  position:fixed; 
+  color:pink; 
+  font-size:20px;
+  animation:float 6s linear infinite;
+  text-shadow: 0 0 10px #ff1493, 0 0 20px #ff69b4;
+  margin-top: -800px;
 }
 
-@keyframes float{
-0%{transform:translateY(100vh)}
-100%{transform:translateY(-10vh)}
+/* --- HEART FLOAT --- */
+@keyframes float{0%{transform:translateY(100vh) rotate(0deg);}100%{transform:translateY(-10vh) rotate(360deg);}}
+
+/* --- 3D CAROUSEL --- */
+.carousel { width:300px; height:400px; margin:60px auto; perspective:1200px; position:relative; overflow:hidden; border-radius:15px; box-shadow:0 0 40px rgba(255,105,180,0.5);}
+.carousel-img{ width:100%; height:100%; position:absolute; top:0; left:0; object-fit:cover; border-radius:15px; opacity:0; transform: rotateY(20deg) scale(0.95); transition: opacity 1s ease, transform 1s ease, box-shadow 0.5s ease; cursor:pointer;}
+.carousel-img.active{ opacity:1; transform:rotateY(0deg) scale(1); z-index:1; box-shadow:0 0 20px pink,0 0 50px rgba(255,0,128,0.5);}
+
+/* --- MODAL --- */
+.modal{ display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); justify-content:center; align-items:center; z-index:999;}
+.modal img{ max-width:90%; max-height:90%; border-radius:10px; box-shadow:0 0 30px pink; }
+
+/* --- ROADMAP --- */
+.love-map{ 
+  position:relative; 
+  width:260px; 
+  height:260px; 
+  margin:30px auto;}
+.road{ position:absolute; top:50%; left:50%; width:200px; height:200px; margin-left:-100px; margin-top:-100px; border:3px dashed pink; border-radius:50%;}
+.milestone{ 
+  position:absolute; 
+  width:45px; 
+  height:45px; 
+  background:pink; 
+  border-radius:50%; 
+  display:flex; 
+  align-items:center; 
+  justify-content:center; 
+  font-size:14px; 
+  cursor:pointer; 
+  font-weight: bold;
+box-shadow: 0 0 12px #ff4da6, 0 0 25px #ff69b4;transition: transform 0.3s, box-shadow 0.3s;}
+.milestone:hover{ transform:scale(1.2); box-shadow:0 0 25px #ff99cc; }
+
+/* --- ENVELOPE --- */
+.envelope{ 
+  background:pink; 
+  padding:18px 35px; 
+  border-radius:12px; 
+  cursor:pointer;
+  margin:auto;
+  width:180px; 
+  transition:all 0.3s;}
+.envelope:hover{ transform:scale(1.1);font-weight: bold;
+box-shadow: 0 0 15px #ff4da6;
+ }
+
+/* --- PROPOSAL --- */
+#proposal{ display:none; 
+  position:fixed; 
+  top:0; 
+  left:0; 
+  width:100%; 
+  height:100%; 
+  background:#1a1a2e;
+  justify-content:center; 
+  align-items:center; 
+  flex-direction:column;
+  box-shadow: 0 0 25px #ff69b4;
 }
+.box{ background:#111; padding:30px; border-radius:20px; text-align:center;}
+button{ padding:10px 20px; border:none; border-radius:10px; background:pink; color:white; margin:10px; cursor:pointer; transition:transform 0.3s, box-shadow 0.3s;}
+button:hover{ transform:scale(1.1); box-shadow:0 0 20px pink; }
 
-/* 3D CAROUSEL */
-
-.carousel {
-  width: 300px;
-  height: 400px;
-  margin: 60px auto;
-  perspective: 1200px;
-  position: relative;
-  overflow: hidden;
-  border-radius: 15px;
-  box-shadow: 0 0 40px rgba(255,105,180,0.5);
-  background: black;
-}
-
-.carousel-img {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  object-fit: cover;
-  border-radius: 15px;
-  opacity: 0;
-  transform: rotateY(20deg) scale(0.95);
-  transition: opacity 1s ease, transform 1s ease;
-  cursor: pointer;
-}
-.carousel-img.active {
-  opacity: 1;
-  transform: rotateY(0deg) scale(1);
-  z-index: 1;
-}
-
-/* MODAL */
-
-.modal{
-display:none;
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:black;
-justify-content:center;
-align-items:center;
-z-index:999;
-}
-
-.modal img{
-max-width:90%;
-max-height:90%;
-border-radius:10px;
-}
-
-/* ROADMAP */
-
-.love-map{
-position:relative;
-width:260px;
-height:260px;
-margin:30px auto;
-}
-
-.road{
-position:absolute;
-top:50%;
-left:50%;
-width:200px;
-height:200px;
-margin-left:-100px;
-margin-top:-100px;
-border:3px dashed pink;
-border-radius:50%;
-}
-
-.milestone{
-position:absolute;
-width:40px;
-height:40px;
-background:pink;
-border-radius:50%;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:12px;
-cursor:pointer;
-}
-
-/* ENVELOPE */
-
-.envelope{
-background:pink;
-padding:15px 30px;
-border-radius:10px;
-cursor:pointer;
-margin:auto;
-width:160px;
-}
-
-/* PROPOSAL */
-
-#proposal{
-display:none;
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,.8);
-justify-content:center;
-align-items:center;
-}
-
-.box{
-background:#111;
-padding:30px;
-border-radius:20px;
-}
-
-button{
-padding:10px 20px;
-border:none;
-border-radius:10px;
-background:pink;
-color:white;
-margin:10px;
-}
-
-/* CAKE */
-
-#cake{
-display:none;
-font-size:60px;
-margin-top:20px;
-animation:bounce 1s infinite;
-}
-
-@keyframes bounce{
-0%,100%{transform:translateY(0)}
-50%{transform:translateY(-10px)}
-}
-@media(max-width:600px){
-  /* Header smaller on mobile */
-  .header { font-size:24px; }
-
-  /* Card adjustments */
-  .card {
-    width:95%;
-    padding:15px;
-    margin:15px auto;
-  }
-
-  /* Typing text smaller */
-  #typing { font-size:16px; }
-
-  /* Carousel smaller */
-  .carousel { width:90%; height:250px; }
-  .carousel-img { border-radius:12px; }
-
-  /* Envelope smaller */
-  .envelope { width:150px; padding:12px 25px; }
-
-  /* Love map smaller */
-  .love-map { width:180px; height:180px; }
-  .road { width:140px; height:140px; margin-left:-70px; margin-top:-70px; }
-  .milestone { width:35px; height:35px; font-size:12px; }
-
-  /* Cake emoji smaller */
-  #cake { font-size:70px; }
-
-  /* Hearts smaller */
-  .heart { font-size:14px; }
-
-  /* Intro H1 smaller */
-  #intro h1 { font-size:50px; letter-spacing:5px; }
-
-  /* Modal image max size */
-  .modal img { max-width:95%; max-height:80%; }
-
-  /* Proposal box smaller */
-  #proposal .box { padding:20px; width:90%; }
-  button { padding:8px 16px; font-size:14px; }
-}
+/* --- CAKE --- */
+#cake{ display:none; 
+ font-size: 100px;
+text-shadow: 0 0 20px #ff69b4, 0 0 50px #ff1493;
+  margin-top:20px; 
+  animation:bounce 1s infinite;}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-15px)}}
 </style>
-
 </head>
-
 <body>
 
-<div id="intro">
-<h1>AYESHA</h1>
-</div>
+<canvas id="stars"></canvas>
+<canvas id="sparkle"></canvas>
+
+<!-- INTRO -->
+<div id="intro"><h1>AYESHA</h1></div>
 
 <h1 class="header">Happy Birthday Ayesha ❤️</h1>
 
 <div class="card">
-
-<h3>Loving You Since</h3>
-<div id="love"></div>
-
-<div id="typing"></div>
-
+  <h3>Loving You Since</h3>
+  <div id="love"></div>
+  <div id="typing"></div>
 </div>
 
 <div class="carousel" id="carousel">
@@ -291,7 +187,7 @@ animation:bounce 1s infinite;
   <img src="2.jpg" class="carousel-img">
   <img src="3.jpg" class="carousel-img">
   <img src="4.jpg" class="carousel-img">
-  <img src="51.jpg" class="carousel-img">
+  <img src="5.jpg" class="carousel-img">
   <img src="6.jpg" class="carousel-img">
   <img src="7.jpg" class="carousel-img">
   <img src="8.jpg" class="carousel-img">
@@ -343,197 +239,178 @@ animation:bounce 1s infinite;
 </div>
 
 <div class="card">
-
-<h2>Our Journey ❤️</h2>
-
-<div class="love-map">
-<div class="road"></div>
-</div>
-
+  <h2>Our Journey ❤️</h2>
+  <div class="love-map">
+    <div class="road"></div>
+  </div>
 </div>
 
 <div class="card">
-
-<h3>Secret Letter</h3>
-
-<div class="envelope" onclick="window.location='letter.html'">
-Open Letter
-</div>
-
+  <h3>Secret Letter</h3>
+  <div class="envelope" onclick="window.location='letter.html'">Open Letter</div>
 </div>
 
 <div id="cake">🎂</div>
-
-<div class="modal" id="modal">
-<img id="modalImg">
-</div>
+<div class="modal" id="modal"><img id="modalImg"></div>
 
 <div id="proposal">
-
-<div class="box">
-
-<h2>Will You Marry Me ❤️</h2>
-
-<button onclick="yes()">Yes</button>
-<button onclick="closeP()">Later</button>
-
+  <div class="box">
+    <h2>Will You Marry Me ❤️</h2>
+    <button onclick="yes()">Yes</button>
+    <button onclick="closeP()">Later</button>
+  </div>
 </div>
 
-</div>
-
-<audio id="music" loop>
-<source src="music.mp3">
-</audio>
+<audio id="music" loop><source src="music.mp3"></audio>
 
 <script>
+// --- INTRO ---
+setTimeout(()=>{document.getElementById("intro").style.display="none"},3000);
 
-/* INTRO */
-
-setTimeout(()=>{
-document.getElementById("intro").style.display="none"
-},3000)
-
-/* LOVE COUNTER */
-
-let start=new Date("2018-06-19")
-
+// --- LOVE COUNTER ---
+let start=new Date("2018-06-19");
 setInterval(()=>{
-let now=new Date()
-let d=Math.floor((now-start)/(1000*60*60*24))
-document.getElementById("love").innerHTML=d+" days ❤️"
-},1000)
+  let now=new Date();
+  let d=Math.floor((now-start)/(1000*60*60*24));
+  document.getElementById("love").innerHTML=d+" days ❤️";
+},1000);
 
-/* TYPING */
-
-const text="You are the most beautiful part of my life ❤️"
-let t=0
-
-function typing(){
-if(t<text.length){
-document.getElementById("typing").innerHTML+=text.charAt(t)
-t++
-setTimeout(typing,80)
-}
-}
-
-typing()
-
-/* HEARTS */
-
-setInterval(()=>{
-let h=document.createElement("div")
-h.className="heart"
-h.innerHTML="❤️"
-h.style.left=Math.random()*100+"vw"
-document.body.appendChild(h)
-setTimeout(()=>h.remove(),6000)
-},500)
-
-/* 3D CAROUSEL */
-
-
-const carouselImages = document.querySelectorAll('.carousel-img');
-let currentIndex = 0;
-
-function showNext() {
-  carouselImages.forEach((img, idx) => img.classList.remove('active'));
-  carouselImages[currentIndex].classList.add('active');
-  currentIndex = (currentIndex + 1) % carouselImages.length;
-}
-
-// click to open modal
-carouselImages.forEach(img => {
-  img.addEventListener('click', () => {
-    modal.style.display = 'flex';
-    modalImg.src = img.src;
-  });
-});
-
-// start carousel
-showNext();
-setInterval(showNext, 3000);
-/* MODAL */
-
-const modal=document.getElementById("modal")
-const modalImg=document.getElementById("modalImg")
-
-modal.onclick=()=>modal.style.display="none"
-
-/* ROADMAP */
-
-const years=[2018,2019,2020,2021,2022,2023,2024,2025]
-
-const map=document.querySelector(".love-map")
-
-const r=90
-const milestoneImages = [
-  "9289.jpg",
-  "9812.jpg",
-  "9956.jpg",
-  "10145.jpg",
-  "10254.jpg",
-  "10307.jpg",
-  "98.jpeg",
-  "99.jpeg"
+// --- TYPING ---
+const messages = [
+  "You are the most beautiful part of my life ❤️",
+  "Every moment with you is magical ✨",
+  "Happy Birthday, my love 💖",
+  "May all your dreams come true 🌹"
 ];
 
+let messageIndex = 0; // kaun sa message type ho raha
+let charIndex = 0;
+
+function typeMessage() {
+  const typingElement = document.getElementById("typing");
+  if (charIndex < messages[messageIndex].length) {
+    typingElement.innerHTML += messages[messageIndex].charAt(charIndex);
+    charIndex++;
+    setTimeout(typeMessage, 100); // typing speed adjust
+  } else {
+    // Complete message → 2 sec delay → next message
+    setTimeout(() => {
+      charIndex = 0;
+      messageIndex = (messageIndex + 1) % messages.length; // loop messages
+      typingElement.innerHTML = ""; // clear previous message
+      typeMessage();
+    }, 2000); // 2 seconds pause between messages
+  }
+}
+
+// Start typing
+typeMessage();
+
+// --- HEARTS ---
+let hearts=[];
+function createHeart(){
+  let h=document.createElement("div");
+  h.className="heart";
+  h.innerHTML="❤️";
+  h.style.left=Math.random()*100+"vw";
+  h.style.fontSize=(10+Math.random()*20)+"px";
+  document.body.appendChild(h);
+  hearts.push({el:h,x:parseFloat(h.style.left),y:window.innerHeight});
+  setTimeout(()=>{h.remove(); hearts=hearts.filter(heart=>heart.el!==h);},6000);
+}
+setInterval(createHeart,500);
+
+// --- CAROUSEL ---
+const carouselImages=document.querySelectorAll('.carousel-img');
+let currentIndex=0;
+function showNext(){ carouselImages.forEach(img=>img.classList.remove('active')); carouselImages[currentIndex].classList.add('active'); currentIndex=(currentIndex+1)%carouselImages.length;}
+carouselImages.forEach(img=>{img.addEventListener('click',()=>{modal.style.display='flex'; modalImg.src=img.src;});});
+showNext(); setInterval(showNext,3000);
+
+// --- MODAL ---
+const modal=document.getElementById("modal");
+const modalImg=document.getElementById("modalImg");
+modal.onclick=()=>modal.style.display="none";
+
+// --- ROADMAP ---
+const years=[2018,2019,2020,2021,2022,2023,2024,2025];
+const map=document.querySelector(".love-map");
+const r=90;
+const milestoneImages=["9289.jpg","9812.jpg","9956.jpg","10145.webp","10254.webp","10307.webp","98.jpeg","99.jpeg"];
 years.forEach((y,i)=>{
+  let angle=(i/years.length)*2*Math.PI;
+  let x=130+r*Math.cos(angle)-20;
+  let yPos=130+r*Math.sin(angle)-20;
+  let div=document.createElement("div");
+  div.className="milestone"; div.innerHTML=y;
+  div.style.left=x+"px"; div.style.top=yPos+"px";
+  div.onclick=()=>{modal.style.display="flex"; modalImg.src=milestoneImages[i];};
+  map.appendChild(div);
+});
 
-let angle=(i/years.length)*2*Math.PI
+// --- CONFETTI ---
+setTimeout(()=>{confetti({particleCount:200,spread:120})},4000);
 
-let x=130+r*Math.cos(angle)-20
-let yPos=130+r*Math.sin(angle)-20
+// --- PROPOSAL ---
+setTimeout(()=>{document.getElementById("proposal").style.display="flex"},8000);
+function yes(){document.getElementById("proposal").style.display="none"; document.getElementById("cake").style.display="block"; confetti({particleCount:400,spread:180});}
+function closeP(){document.getElementById("proposal").style.display="none";}
 
-let div=document.createElement("div")
+// --- MUSIC ---
+document.body.onclick=()=>{document.getElementById("music").play();}
 
-div.className="milestone"
-div.innerHTML=y
+// --- STAR BACKGROUND ---
+const canvas=document.getElementById('stars');
+const ctx=canvas.getContext('2d');
+canvas.width=window.innerWidth; canvas.height=window.innerHeight;
 
-div.style.left=x+"px"
-div.style.top=yPos+"px"
-
-div.onclick=()=>{
-modal.style.display="flex"
- modalImg.src = milestoneImages[i];
-} 
-
-map.appendChild(div)
-
-})
-
-/* CONFETTI */
-
-setTimeout(()=>{
-confetti({particleCount:200,spread:120})
-},4000)
-
-/* PROPOSAL */
-
-setTimeout(()=>{
-document.getElementById("proposal").style.display="flex"
-},8000)
-
-/* YES */
-
-function yes(){
-document.getElementById("proposal").style.display="none"
-document.getElementById("cake").style.display="block"
-confetti({particleCount:400,spread:180})
+let stars=[];
+for(let i=0;i<200;i++){
+  stars.push({x:Math.random()*canvas.width, y:Math.random()*canvas.height, r:Math.random()*1.5, vx:(Math.random()-0.5)*0.2, vy:(Math.random()-0.5)*0.2});
 }
 
-/* CLOSE */
-
-function closeP(){
-document.getElementById("proposal").style.display="none"
+function drawStars(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  for(let s of stars){
+    ctx.beginPath();
+    ctx.arc(s.x,s.y,s.r,0,2*Math.PI);
+    ctx.fillStyle='white';
+    ctx.fill();
+    s.x+=s.vx; s.y+=s.vy;
+    if(s.x<0)s.x=canvas.width; if(s.x>canvas.width)s.x=0;
+    if(s.y<0)s.y=canvas.height; if(s.y>canvas.height)s.y=0;
+  }
+  requestAnimationFrame(drawStars);
 }
+drawStars();
+window.onresize=()=>{canvas.width=window.innerWidth; canvas.height=window.innerHeight;};
 
-/* MUSIC */
+// --- SPARKLE TRAILS FOR HEARTS ---
+const sparkleCanvas=document.getElementById('sparkle');
+const sctx=sparkleCanvas.getContext('2d');
+sparkleCanvas.width=window.innerWidth; sparkleCanvas.height=window.innerHeight;
+let sparkles=[];
 
-document.body.onclick=()=>{
-document.getElementById("music").play()
+function animateSparkles(){
+  sctx.clearRect(0,0,sparkleCanvas.width,sparkleCanvas.height);
+  // create new sparkles from hearts
+  hearts.forEach(h=>{
+    let rect=h.el.getBoundingClientRect();
+    sparkles.push({x:rect.left+10,y:rect.top+10,r:Math.random()*2+1,alpha:1});
+  });
+  // draw sparkles
+  sparkles.forEach(s=>{
+    sctx.beginPath();
+    sctx.arc(s.x,s.y,s.r,0,2*Math.PI);
+    sctx.fillStyle=`rgba(255,192,203,${s.alpha})`;
+    sctx.fill();
+    s.alpha-=0.02;
+  });
+  sparkles=sparkles.filter(s=>s.alpha>0);
+  requestAnimationFrame(animateSparkles);
 }
-
+animateSparkles();
+window.onresize=()=>{sparkleCanvas.width=window.innerWidth; sparkleCanvas.height=window.innerHeight;}
 </script>
-
 </body>
 </html>
